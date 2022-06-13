@@ -1,0 +1,34 @@
+<br>
+<div class="contenido">
+<button routerLink="/catalog" class="button"> Atrás </button>
+
+<h1>{{comic.title}}</h1>
+
+<img
+    [src]="comic.images[0].path + '/portrait_fantastic.' + comic.images[0].extension"
+    alt="Portada"
+    style="width: 23%"
+    *ngIf="
+      comic.images && comic.images.length > 0 && comic.images[0].path;
+      else noImage
+    "
+  />
+
+  <p> <b>DESCRIPCION:</b>   {{comic.description}}</p>
+  <p> <b>ISBN:</b>   {{comic.isbn}}</p>
+  <p>NUMERO DE PAGINAS:   {{comic.pageCount}}</p>
+  <!-- <p *ngFor="let creator of comic.creators">      \ \ \ \ \    {{creator.name}} ({{creator.role}})</p> -->
+  <p><b>CREADORES:</b> {{comic.creators | creators}}</p>
+  <p><b>FECHA DE SALIDA:    </b>{{comic.onsaleDate | date: 'shortDate' }}</p>
+
+  <button (click)="addToCollection()" class="button"> Añadir a la colección </button>
+
+
+  <ng-template #noImage>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/1920px-Marvel_Logo.svg.png"
+      alt="Sin Portada"
+      style="width: 100%"
+    />
+  </ng-template>
+</div>
